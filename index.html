@@ -89,19 +89,19 @@ footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--mute)}
 <section aria-labelledby="why">
   <h2 id="why">Why trading technology</h2>
   <p>I used to be a trader. What kept pulling me in was never only the market. It was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong.</p>
-  <p>Trading showed me an order book from the user's side. Building one shows me the other side, where every choice in the data structures, the concurrency and the networking affects speed and correctness. That is why I'm writing a matching engine in C++, and why I want to work on trading and settlement infrastructure.</p>
+  <p>Trading showed me an order book from the user's side. Building one shows me the other side, where every choice in the data structures, the concurrency and the networking affects speed and correctness. That is why I wrote a matching engine in C++, and why I want to work on trading and settlement infrastructure.</p>
 </section>
 
 <section aria-labelledby="projects">
   <h2 id="projects">Projects</h2>
   <h3>Limit order book and matching engine</h3>
   <p class="stack mono mute">C++, CMake</p>
-  <p>A price-time priority order book that matches limit and market orders and supports cancellation. Interface, implementation and tests live in separate files in a CMake project, so the matching logic can be tested on its own. I'm growing it along the path an order takes in a real venue:</p>
+  <p>A price-time priority order book that matches limit and market orders and supports cancellation. Interface, implementation and tests live in separate files in a CMake project, so the matching logic can be tested on its own. I built it out along the path an order takes in a real venue:</p>
   <div class="panel pipe">
     <div><h4>Matching core</h4><p>Price-time priority matching for limit and market orders, plus cancellation.</p><span class="st done">Built</span></div>
-    <div><h4>Order queue</h4><p>A concurrent producer-consumer queue feeding the engine.</p><span class="st next">Next</span></div>
-    <div><h4>Network layer</h4><p>A TCP layer so clients can send orders to the engine.</p><span class="st next">Planned</span></div>
-    <div><h4>Persistence</h4><p>Storing orders and trades so state survives a restart.</p><span class="st next">Planned</span></div>
+    <div><h4>Order queue</h4><p>A concurrent producer-consumer queue feeding the engine.</p><span class="st done">Built</span></div>
+    <div><h4>Network layer</h4><p>A TCP layer so clients can send orders to the engine.</p><span class="st done">Built</span></div>
+    <div><h4>Persistence</h4><p>Storing orders and trades so state survives a restart.</p><span class="st done">Built</span></div>
   </div>
   <div class="two">
     <article class="proj">
@@ -131,9 +131,9 @@ footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--mute)}
 <section aria-labelledby="skills">
   <h2 id="skills">Skills</h2>
   <dl>
-    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, parsing</dd>
+    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, TCP networking, parsing</dd>
     <dt>Languages</dt><dd>C and C++ (primary), Python</dd>
-    <dt>Tools</dt><dd>Linux command line, Git, GDB, CMake</dd>
+    <dt>Tools</dt><dd>Linux command line, Git, GDB, CMake, SQLite</dd>
     <dt>Algorithms</dt><dd>Hash maps, trees, priority queues, graphs</dd>
   </dl>
 </section>
