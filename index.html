@@ -104,7 +104,7 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:40px 0}
 .stats b{display:block;font-size:2rem;line-height:1.1;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stats span{display:block;margin-top:4px;font-size:.875rem;color:var(--mute);max-width:16ch}
-.facets{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facets{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .facet{background:var(--soft);border-radius:12px;padding:24px;box-shadow:0 0 0 1px var(--line);transition:transform 250ms var(--ease),box-shadow 250ms var(--ease)}
 .facet h3{font-size:1rem}
 .facet p{margin:0;color:var(--mute);font-size:.9375rem}
@@ -122,6 +122,12 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
 .story-body.open .story-in{opacity:1;transform:none;transition-delay:120ms}
 @media (max-width:52rem){.stats{grid-template-columns:1fr 1fr}.facets{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.js #hero-title .w{opacity:1;transform:none;transition:none}.facet,.demo,.story-btn,.story-btn svg,.story-body,.story-in,.theme,.theme svg,body,nav,footer,.demo .in{transition:none}.bar{display:none}}
+
+body{overflow-x:clip}
+.js .rr{opacity:0;transform:translateX(48px);transition:opacity 600ms var(--ease) var(--d,0ms),transform 600ms var(--ease) var(--d,0ms)}
+.js .rr.in{opacity:1;transform:none}
+@media (max-width:52rem){.js .rr{transform:translateX(24px)}}
+@media (prefers-reduced-motion:reduce){.js .rr{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -164,8 +170,7 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
   <div class="facets">
     <div class="facet rv"><h3>Who I am</h3><p>A former trader turned engineer. Before programming I built hardware and electrical projects, which is why I like systems that sit close to the machine.</p></div>
     <div class="facet rv" style="--d:60ms"><h3>What I do</h3><p>I write systems software in C and C++: an order book matching engine with a concurrent queue, TCP layer and SQLite persistence, a Unix shell and a LISP interpreter.</p></div>
-    <div class="facet rv"><h3>Strengths</h3><p>Learning from first principles, seeing a project through every planned stage, and leading and communicating with a team, which I practised as president of my school's JETS Club.</p></div>
-    <div class="facet rv" style="--d:60ms"><h3>Ambition</h3><p>To work on trading and infrastructure software, the systems that accept, match and settle orders quickly and correctly, and to grow into an engineer who can design them end to end.</p></div>
+    <div class="facet rv" style="--d:120ms"><h3>Strengths</h3><p>Learning from first principles, seeing a project through every planned stage, and leading and communicating with a team, which I practised as president of my school's JETS Club.</p></div>
   </div>
   <div class="story rv">
     <button class="story-btn" id="story-btn" type="button" aria-expanded="false" aria-controls="story-body"><span>My story</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -179,8 +184,8 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
 <section id="projects" aria-labelledby="h-projects">
   <h2 id="h-projects" class="rv">Projects</h2>
 
-  <article class="proj rv">
-    <div>
+  <article class="proj">
+    <div class="rv">
       <h3>Limit order book and matching engine</h3>
       <p class="stack mono">C++, CMake, SQLite</p>
       <p>A price-time priority order book that matches limit and market orders, built out along the path an order takes in a real venue.</p>
@@ -191,7 +196,7 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
         <li>Interface, implementation and tests in separate files</li>
       </ul>
     </div>
-    <div class="demo" aria-hidden="true"><div class="in">
+    <div class="rr" style="--d:120ms"><div class="demo" aria-hidden="true"><div class="in">
       <div class="book">
         <div class="hd"><span>Price</span><span>Size</span></div>
         <div id="asks"></div>
@@ -199,11 +204,11 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
         <div id="bids"></div>
       </div></div>
       <p class="cap">Simulated order book for illustration: orders arrive, rest, cross and match.</p>
-    </div>
+    </div></div>
   </article>
 
-  <article class="proj rv">
-    <div>
+  <article class="proj">
+    <div class="rv">
       <h3>Custom Unix shell</h3>
       <p class="stack mono">C, Linux</p>
       <p>Built from scratch to learn how an operating system manages processes and I/O.</p>
@@ -215,18 +220,18 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
       </ul>
       <p class="more"><a href="https://github.com/opeotoabasi/myshell">View on GitHub</a></p>
     </div>
-    <div class="demo" aria-hidden="true"><div class="in">
+    <div class="rr" style="--d:120ms"><div class="demo" aria-hidden="true"><div class="in">
       <div class="procs">
         <div class="proc" id="sh-p"><b></b><span class="mute"></span><br><span class="mute"></span></div>
         <div class="proc child" id="sh-c"><b></b><span class="mute"></span><br><span class="mute"></span></div>
       </div>
       <div class="log" id="sh-log"></div></div>
       <p class="cap">What the shell does when you run a command.</p>
-    </div>
+    </div></div>
   </article>
 
-  <article class="proj rv">
-    <div>
+  <article class="proj">
+    <div class="rv">
       <h3>LISP interpreter</h3>
       <p class="stack mono">C, GDB</p>
       <p>An interpreter that reads Lisp source, builds an abstract syntax tree and evaluates it.</p>
@@ -238,7 +243,7 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
       </ul>
       <p class="more"><a href="https://github.com/opeotoabasi/build-your-own-lisp">View on GitHub</a></p>
     </div>
-    <div class="demo" aria-hidden="true"><div class="in">
+    <div class="rr" style="--d:120ms"><div class="demo" aria-hidden="true"><div class="in">
       <p class="expr mono">(+ 1 (* 2 3))</p>
       <svg viewBox="0 0 340 200" role="img" aria-label="Syntax tree">
         <line class="ed" data-s="2" x1="170" y1="28" x2="80" y2="100"/>
@@ -252,7 +257,7 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
         <g class="nd" data-s="3" data-e="4" transform="translate(310,172)"><circle r="20"/><text>3</text></g>
       </svg></div>
       <p class="cap" id="ls-cap">Parse the expression, then evaluate the tree from the leaves up.</p>
-    </div>
+    </div></div>
   </article>
 </section>
 
@@ -300,9 +305,9 @@ nav a[aria-current]{color:var(--ink);background:var(--soft)}
 (function(){
 document.documentElement.classList.add('js');
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-var rv=document.querySelectorAll('.rv');
+var rv=document.querySelectorAll('.rv,.rr');
 if('IntersectionObserver' in window&&!rm){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
   rv.forEach(function(el){io.observe(el)});
 }else{rv.forEach(function(el){el.classList.add('in')})}
 function loop(el,ms,step){
