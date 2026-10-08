@@ -3,197 +3,304 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ope Edet | Trading systems and systems software</title>
-<meta name="description" content="Ope Edet: a former trader and EEE student at OAU building a C++ limit order book, a Unix shell and a LISP interpreter from first principles.">
+<title>Ope Edet | Software Engineer</title>
+<meta name="description" content="Ope Edet, software engineer building systems software in C and C++: a limit order book matching engine, a Unix shell and a LISP interpreter.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--canvas:#0b1630;--surface:#111f3d;--ink:#e9eef7;--mute:#9aa9c2;--line:rgba(255,255,255,.1);--accent:#4cc9bd;--ask:#ff8a65;--edge:inset 0 1px 0 rgba(255,255,255,.06)}
+:root{--bg:#fff;--soft:#f5f6f8;--ink:#12161c;--mute:#5a6472;--line:rgba(18,22,28,.1);--accent:#1d4ed8;--warm:#c2410c;--ease:cubic-bezier(.23,1,.32,1)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--soft:#151a21;--ink:#e8ecf1;--mute:#9aa5b4;--line:rgba(255,255,255,.1);--accent:#7ea2ff;--warm:#ff9566}}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--canvas);color:var(--ink);font:400 1rem/1.6 "Schibsted Grotesk",system-ui,sans-serif}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 Inter,system-ui,sans-serif}
 a{color:var(--accent)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
-.sm{font-size:.875rem}
-.mute{color:var(--mute)}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
-h1,h2,h3{font-weight:600;margin:0}
-h1{font-size:clamp(2.25rem,5vw,3.5rem);line-height:1.12;letter-spacing:-.02em;margin-bottom:24px}
-h2{font-size:1.75rem;line-height:1.2;letter-spacing:-.01em;margin-bottom:24px}
-h3{font-size:1.25rem;line-height:1.25;margin-bottom:8px}
-p{margin:0 0 16px;max-width:68ch}
-section{padding:64px 0;border-top:1px solid var(--line)}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:72px 0 64px}
-.who{font-weight:500;margin-bottom:24px}
-.lede{font-size:1.125rem;color:var(--mute);max-width:36rem;margin-bottom:24px}
-.links{display:flex;flex-wrap:wrap;gap:24px;list-style:none;margin:0;padding:0;font-weight:500}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--edge)}
-.book{padding:16px 8px 16px;font:400 .875rem/1.9 "IBM Plex Mono",ui-monospace,monospace}
-.hd,.row{display:grid;grid-template-columns:1fr 1fr;padding:0 8px;position:relative}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:60rem;margin:0 auto;padding:0 24px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.sm{font-size:.875rem}.mute{color:var(--mute)}
+h1,h2,h3{font-weight:600;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.25rem,5.5vw,3.5rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:24px}
+h2{font-size:1.5rem;line-height:1.25;letter-spacing:-.015em;margin-bottom:32px}
+h3{font-size:1.125rem;line-height:1.3;margin-bottom:8px}
+p{margin:0 0 16px;max-width:66ch;text-wrap:pretty}
+section{padding:80px 0;scroll-margin-top:56px}
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);box-shadow:0 1px 0 var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+nav b{font-weight:600;white-space:nowrap}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav a{display:block;padding:8px 12px;border-radius:8px;color:var(--mute);text-decoration:none;font-size:.875rem;white-space:nowrap;transition:color 150ms ease,background-color 150ms ease}
+@media (hover:hover){nav a:hover{color:var(--ink);background:var(--soft)}}
+.hero{padding:96px 0 80px}
+.lede{font-size:1.125rem;color:var(--mute);max-width:40rem}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:8px;font-weight:500;text-decoration:none;color:var(--ink);box-shadow:0 0 0 1px var(--line);transition:transform 150ms var(--ease),background-color 150ms ease}
+.btn.pri{background:var(--accent);color:#fff;box-shadow:none}
+.btn:active{transform:scale(.97)}
+@media (hover:hover){.btn:hover{background:var(--soft)}.btn.pri:hover{background:var(--accent);filter:brightness(1.08)}}
+.status{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;color:var(--mute);font-size:.875rem}
+.status i{width:8px;height:8px;border-radius:50%;background:#16a34a}
+.proj{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;margin-bottom:80px}
+.proj:last-child{margin-bottom:0}
+.proj ul{margin:0;padding-left:18px;color:var(--mute)}
+.proj li{margin-bottom:4px}
+.more{margin:16px 0 0;font-weight:500}.stack{margin:0 0 16px;font-size:.8125rem;color:var(--mute)}
+.demo{background:var(--soft);border-radius:12px;padding:8px;box-shadow:0 0 0 1px var(--line)}
+.demo .in{background:var(--bg);border-radius:4px;padding:16px;min-height:264px;display:flex;flex-direction:column;justify-content:center}
+.cap{margin:12px 4px 4px;font-size:.75rem;color:var(--mute)}
+.book{font:400 .8125rem/1.9 "JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.hd,.lv{display:grid;grid-template-columns:1fr 1fr;padding:0 8px;position:relative}
 .hd{color:var(--mute);font-size:.75rem}
-.row span:last-child,.hd span:last-child{text-align:right}
-.row::before{content:"";position:absolute;top:2px;bottom:2px;right:0;width:var(--w,0%);opacity:.2;border-radius:2px;transition:width .45s}
-.a{color:var(--ask)}.a::before{background:var(--ask)}
+.lv span:last-child,.hd span:last-child{text-align:right}
+.lv::before{content:"";position:absolute;inset:2px 0 2px auto;width:var(--w,0%);opacity:.14;border-radius:2px;transition:width 450ms var(--ease)}
+.a{color:var(--warm)}.a::before{background:var(--warm)}
 .b{color:var(--accent)}.b::before{background:var(--accent)}
-.mid{display:flex;justify-content:space-between;padding:8px;margin:8px 0;border-block:1px solid var(--line)}
-.row.hit{animation:hit .5s}
-@keyframes hit{from{background:rgba(233,238,247,.22)}to{background:transparent}}
-.cap{font:400 .75rem/1.4 "Schibsted Grotesk",sans-serif;color:var(--mute);margin:8px 8px 0}
-.pipe{display:grid;grid-template-columns:repeat(4,1fr);margin:24px 0}
-.pipe>div{padding:24px;border-left:1px solid var(--line)}
-.pipe>div:first-child{border-left:0}
-.pipe h4{font-size:1rem;font-weight:600;margin:0 0 8px}
-.pipe p{font-size:.875rem;color:var(--mute);margin:0 0 16px}
-.st{font-size:.875rem;font-weight:500}
-.st.done{color:var(--accent)}.st.next{color:var(--mute)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
-.two .proj{padding-left:24px;border-left:1px solid var(--line)}
-.stack{font-size:.875rem;margin:0 0 8px}
-.tl{list-style:none;margin:0;padding:0 0 0 24px;border-left:1px solid var(--line)}
-.tl li{position:relative;padding:0 0 32px}
-.tl li::before{content:"";position:absolute;left:-29px;top:10px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-.tl .when{font-size:.875rem;color:var(--mute);display:block}
-.tl p{margin:0}
-dl{margin:0;display:grid;grid-template-columns:192px 1fr;gap:16px 24px}
-dt{font-weight:500}dd{margin:0;color:var(--mute)}
-footer{padding:48px 0 64px;border-top:1px solid var(--line);color:var(--mute)}
-@media (max-width:52rem){.hero{grid-template-columns:1fr;gap:32px;padding-top:48px}.pipe{grid-template-columns:1fr 1fr}.pipe>div:nth-child(3){border-left:0}.two{grid-template-columns:1fr}dl{grid-template-columns:1fr;gap:0}dd{margin-bottom:16px}}
-@media (max-width:32rem){.pipe{grid-template-columns:1fr}.pipe>div{border-left:0;border-top:1px solid var(--line)}.pipe>div:first-child{border-top:0}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.row::before{transition:none}.row.hit{animation:none}}
+.mid{display:flex;justify-content:space-between;padding:6px 8px;margin:6px 0;box-shadow:0 -1px 0 var(--line),0 1px 0 var(--line)}
+.lv.hit{animation:hit 500ms ease-out}
+@keyframes hit{from{background:color-mix(in srgb,var(--ink) 14%,transparent)}to{background:transparent}}
+.procs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proc{border-radius:8px;padding:12px 14px;box-shadow:0 0 0 1px var(--line);font-size:.8125rem;line-height:1.5}
+.proc b{display:block;font-weight:600;font-size:.9375rem}
+.proc.child{opacity:0;transform:translateY(8px);transition:opacity 250ms var(--ease),transform 250ms var(--ease)}
+.proc.child.on{opacity:1;transform:none;box-shadow:0 0 0 1px var(--accent)}
+.log{margin:16px 0 0;min-height:88px;font:400 .8125rem/1.7 "JetBrains Mono",ui-monospace,monospace;color:var(--mute);white-space:pre-wrap}
+.log em{font-style:normal;color:var(--ink)}
+svg{display:block;width:100%;height:auto}
+svg text{font:400 14px "JetBrains Mono",ui-monospace,monospace;fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.nd,.ed{opacity:0;transition:opacity 250ms var(--ease)}
+.nd.on,.ed.on{opacity:1}
+.ed{stroke:var(--line);stroke-width:1.5}
+.nd circle{fill:var(--bg);stroke:color-mix(in srgb,var(--ink) 28%,transparent);stroke-width:1.5;transition:stroke 200ms ease,fill 200ms ease}
+.nd.ev circle{stroke:var(--accent);fill:color-mix(in srgb,var(--accent) 14%,var(--bg))}
+.expr{margin:0 0 8px;font-size:.875rem;text-align:center}
+.cols{display:grid;grid-template-columns:200px 1fr;gap:24px 32px}
+.cols dt{font-weight:500}.cols dd{margin:0;color:var(--mute)}
+.item{margin-bottom:32px}
+.item:last-child{margin-bottom:0}
+.item p{margin:0;color:var(--mute)}
+.item h3 .mute{font-weight:400;font-size:.9375rem;margin-left:8px}
+footer{padding:40px 0 64px;color:var(--mute);font-size:.875rem;box-shadow:0 -1px 0 var(--line)}
+.js .rv{opacity:0;transform:translateY(8px);transition:opacity 300ms var(--ease) var(--d,0ms),transform 300ms var(--ease) var(--d,0ms)}
+.js .rv.in{opacity:1;transform:none}
+@media (max-width:52rem){.proj{grid-template-columns:1fr;gap:24px;margin-bottom:64px}.cols{grid-template-columns:1fr;gap:4px}.cols dd{margin-bottom:16px}section{padding:64px 0}.hero{padding:64px 0 56px}}
+@media (max-width:30rem){nav b{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}.lv::before,.nd,.ed,.nd circle,.proc.child,.btn,nav a{transition:none}.lv.hit{animation:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<nav aria-label="Primary"><div class="wrap">
+  <b>Ope Edet</b>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#competitions">Competitions</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<main class="wrap">
 <header class="hero">
-  <div>
-    <p class="who">Ope Edet</p>
-    <h1>I used to trade orders. Now I build the engine that matches them.</h1>
-    <p class="lede">I'm a former trader and an Electrical and Electronics Engineering student at Obafemi Awolowo University. I like to understand technology from first principles, and I'm building the systems software behind financial markets in C and C++.</p>
-    <ul class="links">
-      <li><a href="https://github.com/opeotoabasi">GitHub</a></li>
-      <li><a href="mailto:opeotoabasi@gmail.com">Email</a></li>
-      <li><a href="Ope_Edet_Resume_Talos.pdf">Resume (PDF)</a></li>
-    </ul>
-  </div>
-  <div class="panel book" aria-hidden="true">
-    <div class="hd"><span>Price</span><span>Size</span></div>
-    <div id="asks"></div>
-    <div class="mid"><span id="last">Last --</span><span id="spread">Spread --</span></div>
-    <div id="bids"></div>
-    <p class="cap">A simulated order book for illustration. Orders arrive, rest, cross and match.</p>
+  <p class="status rv"><i></i>Looking for systems and infrastructure internships</p>
+  <h1 class="rv" style="--d:60ms">Software engineer building systems software in C and C++.</h1>
+  <p class="lede rv" style="--d:120ms">I'm an Electrical and Electronics Engineering student at Obafemi Awolowo University. I learn by building from first principles: a limit order book matching engine, a Unix shell and a LISP interpreter.</p>
+  <div class="row rv" style="--d:180ms">
+    <a class="btn pri" href="#projects">See my projects</a>
+    <a class="btn" href="Ope_Edet_Resume.pdf">Download CV</a>
+    <a class="btn" href="mailto:opeotoabasi@gmail.com">Email</a>
+    <a class="btn" href="https://github.com/opeotoabasi">GitHub</a>
   </div>
 </header>
 
-<section aria-labelledby="why">
-  <h2 id="why">Why trading technology</h2>
-  <p>I used to be a trader. What kept pulling me in was never only the market. It was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong.</p>
-  <p>Trading showed me an order book from the user's side. Building one shows me the other side, where every choice in the data structures, the concurrency and the networking affects speed and correctness. That is why I wrote a matching engine in C++, and why I want to work on trading and settlement infrastructure.</p>
+<section id="about" aria-labelledby="h-about">
+  <h2 id="h-about" class="rv">My story</h2>
+  <p class="rv">Before I was 10, I was building small hardware and electrical projects. At about 11 I met BASIC, the first language I used in class, and wrote my first program, a Monopoly game. Moving from hardware to software has shaped how I approach everything since: I want to know how the machine really works.</p>
+  <p class="rv">I also used to be a trader. What kept me interested was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong. Trading showed me an order book from the user's side, so I decided to build one from the other side. That is the matching engine below, and it is why I want to work on trading and infrastructure software.</p>
 </section>
 
-<section aria-labelledby="projects">
-  <h2 id="projects">Projects</h2>
-  <h3>Limit order book and matching engine</h3>
-  <p class="stack mono mute">C++, CMake</p>
-  <p>A price-time priority order book that matches limit and market orders and supports cancellation. Interface, implementation and tests live in separate files in a CMake project, so the matching logic can be tested on its own. I built it out along the path an order takes in a real venue:</p>
-  <div class="panel pipe">
-    <div><h4>Matching core</h4><p>Price-time priority matching for limit and market orders, plus cancellation.</p><span class="st done">Built</span></div>
-    <div><h4>Order queue</h4><p>A concurrent producer-consumer queue feeding the engine.</p><span class="st done">Built</span></div>
-    <div><h4>Network layer</h4><p>A TCP layer so clients can send orders to the engine.</p><span class="st done">Built</span></div>
-    <div><h4>Persistence</h4><p>Storing orders and trades so state survives a restart.</p><span class="st done">Built</span></div>
-  </div>
-  <div class="two">
-    <article class="proj">
+<section id="projects" aria-labelledby="h-projects">
+  <h2 id="h-projects" class="rv">Projects</h2>
+
+  <article class="proj rv">
+    <div>
+      <h3>Limit order book and matching engine</h3>
+      <p class="stack mono">C++, CMake, SQLite</p>
+      <p>A price-time priority order book that matches limit and market orders, built out along the path an order takes in a real venue.</p>
+      <ul>
+        <li>Matching core with limit orders, market orders and cancellation</li>
+        <li>Concurrent producer-consumer order queue</li>
+        <li>TCP networking layer and SQLite persistence</li>
+        <li>Interface, implementation and tests in separate files</li>
+      </ul>
+    </div>
+    <div class="demo" aria-hidden="true"><div class="in">
+      <div class="book">
+        <div class="hd"><span>Price</span><span>Size</span></div>
+        <div id="asks"></div>
+        <div class="mid"><span id="last">Last --</span><span id="spread">Spread --</span></div>
+        <div id="bids"></div>
+      </div></div>
+      <p class="cap">Simulated order book for illustration: orders arrive, rest, cross and match.</p>
+    </div>
+  </article>
+
+  <article class="proj rv">
+    <div>
       <h3>Custom Unix shell</h3>
-      <p class="stack mono mute">C, Linux</p>
-      <p>Built from scratch to learn how an operating system manages processes and I/O: command parsing, built-ins, fork, exec and wait, and redirection through file descriptors. I'm now adding signal handling and job control for background processes and process groups.</p>
-    </article>
-    <article class="proj">
+      <p class="stack mono">C, Linux</p>
+      <p>Built from scratch to learn how an operating system manages processes and I/O.</p>
+      <ul>
+        <li>Prompt loop, command parsing and built-in commands</li>
+        <li>Process creation and control with fork, exec and wait</li>
+        <li>Input and output redirection through file descriptors</li>
+        <li>In progress: signal handling and job control</li>
+      </ul>
+      <p class="more"><a href="https://github.com/opeotoabasi/myshell">View on GitHub</a></p>
+    </div>
+    <div class="demo" aria-hidden="true"><div class="in">
+      <div class="procs">
+        <div class="proc" id="sh-p"><b></b><span class="mute"></span><br><span class="mute"></span></div>
+        <div class="proc child" id="sh-c"><b></b><span class="mute"></span><br><span class="mute"></span></div>
+      </div>
+      <div class="log" id="sh-log"></div></div>
+      <p class="cap">What the shell does when you run a command.</p>
+    </div>
+  </article>
+
+  <article class="proj rv">
+    <div>
       <h3>LISP interpreter</h3>
-      <p class="stack mono mute">C, GDB</p>
-      <p>A grammar and parser built with the mpc library that produce and evaluate abstract syntax trees, with hand-managed memory and Q-expressions for working with unevaluated code.</p>
-    </article>
+      <p class="stack mono">C, GDB</p>
+      <p>An interpreter that reads Lisp source, builds an abstract syntax tree and evaluates it.</p>
+      <ul>
+        <li>Grammar and parser built with the mpc parser combinator library</li>
+        <li>lval structures to represent and evaluate expressions</li>
+        <li>Manual memory management</li>
+        <li>Q-expressions for working with unevaluated code</li>
+      </ul>
+      <p class="more"><a href="https://github.com/opeotoabasi/build-your-own-lisp">View on GitHub</a></p>
+    </div>
+    <div class="demo" aria-hidden="true"><div class="in">
+      <p class="expr mono">(+ 1 (* 2 3))</p>
+      <svg viewBox="0 0 340 200" role="img" aria-label="Syntax tree">
+        <line class="ed" data-s="2" x1="170" y1="28" x2="80" y2="100"/>
+        <line class="ed" data-s="2" x1="170" y1="28" x2="260" y2="100"/>
+        <line class="ed" data-s="3" x1="260" y1="100" x2="210" y2="172"/>
+        <line class="ed" data-s="3" x1="260" y1="100" x2="310" y2="172"/>
+        <g class="nd" data-s="1" data-e="5" id="n0" transform="translate(170,28)"><circle r="20"/><text>+</text></g>
+        <g class="nd" data-s="2" data-e="5" transform="translate(80,100)"><circle r="20"/><text>1</text></g>
+        <g class="nd" data-s="2" data-e="4" id="n1" transform="translate(260,100)"><circle r="20"/><text>*</text></g>
+        <g class="nd" data-s="3" data-e="4" transform="translate(210,172)"><circle r="20"/><text>2</text></g>
+        <g class="nd" data-s="3" data-e="4" transform="translate(310,172)"><circle r="20"/><text>3</text></g>
+      </svg></div>
+      <p class="cap" id="ls-cap">Parse the expression, then evaluate the tree from the leaves up.</p>
+    </div>
+  </article>
+</section>
+
+<section id="education" aria-labelledby="h-edu">
+  <h2 id="h-edu" class="rv">Education</h2>
+  <div class="item rv">
+    <h3>Obafemi Awolowo University (OAU)<span class="mute">Ile-Ife, Nigeria</span></h3>
+    <p>BSc Electrical and Electronics Engineering, Aug 2024 to present (expected Nov 2030).</p>
+    <p>Relevant coursework: Embedded Systems (Arduino), Statistics.</p>
   </div>
 </section>
 
-<section aria-labelledby="path">
-  <h2 id="path">How I got here</h2>
-  <ol class="tl">
-    <li><span class="when">Before I was 10</span><p>I built small hardware and electrical projects, which first pulled me toward engineering.</p></li>
-    <li><span class="when">Around age 11</span><p>I met software through BASIC, the first language I used in class, and wrote my first program: a Monopoly game.</p></li>
-    <li><span class="when">Secondary school</span><p>As president of the JETS Club (Junior Engineers, Technicians and Scientists), I led three electrical and electronics projects to completion across three terms, grew membership by over 200%, and led the club's first appearance at a state-level tech fair.</p></li>
-    <li><span class="when">University</span><p>I won 1st place in Circom, a timed solo circuit-building competition run by SPAC IEEE OAU.</p></li>
-    <li><span class="when">Now</span><p>I'm studying Electrical and Electronics Engineering at OAU, building systems software in C and C++, and have solved 200+ problems on Codeforces and LeetCode.</p></li>
-  </ol>
+<section id="competitions" aria-labelledby="h-comp">
+  <h2 id="h-comp" class="rv">Competitions and leadership</h2>
+  <div class="item rv"><h3>1st place, Circom</h3><p>A timed, solo circuit assembly competition run by SPAC IEEE OAU (Student Activities Committee, IEEE OAU Student Branch).</p></div>
+  <div class="item rv"><h3>President, JETS Club</h3><p>Led my secondary school's Junior Engineers, Technicians and Scientists Club: three electrical and electronics projects completed across three terms, membership up over 200%, and the club's first appearance at a state-level tech fair.</p></div>
+  <div class="item rv"><h3>Competitive programming</h3><p>200+ problems solved on Codeforces and LeetCode, covering hash maps, trees, priority queues and graphs.</p></div>
 </section>
 
-<section aria-labelledby="skills">
-  <h2 id="skills">Skills</h2>
-  <dl>
-    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, TCP networking, parsing</dd>
+<section id="skills" aria-labelledby="h-skills">
+  <h2 id="h-skills" class="rv">Skills</h2>
+  <dl class="cols rv">
     <dt>Languages</dt><dd>C and C++ (primary), Python</dd>
+    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, TCP networking, parsing</dd>
     <dt>Tools</dt><dd>Linux command line, Git, GDB, CMake, SQLite</dd>
     <dt>Algorithms</dt><dd>Hash maps, trees, priority queues, graphs</dd>
   </dl>
 </section>
 
-<footer>
-  <p>I'm looking for a systems or infrastructure software engineering internship. <a href="mailto:opeotoabasi@gmail.com">Get in touch</a>.</p>
-</footer>
-</div>
+<section id="cv" aria-labelledby="h-cv">
+  <h2 id="h-cv" class="rv">CV</h2>
+  <p class="rv">My full CV covers my education, projects, competitions and skills on a single page.</p>
+  <div class="row rv"><a class="btn pri" href="Ope_Edet_Resume.pdf">Download CV (PDF)</a></div>
+</section>
+
+<section id="contact" aria-labelledby="h-contact">
+  <h2 id="h-contact" class="rv">Contact</h2>
+  <p class="rv">I'm looking for a systems or infrastructure software engineering internship. The best way to reach me is by email.</p>
+  <div class="row rv"><a class="btn pri" href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a><a class="btn" href="https://github.com/opeotoabasi">GitHub</a></div>
+</section>
+</main>
+<footer><div class="wrap">Ope Edet &middot; <a href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a> &middot; <a href="https://github.com/opeotoabasi">GitHub</a></div></footer>
 
 <script>
 (function(){
-  var T=0.05,N=6,book={b:{},a:{}},lastTrade=null;
-  function rq(){return 5+Math.floor(Math.random()*36)}
-  function keys(s){return Object.keys(book[s]).map(Number)}
-  function best(s){var k=keys(s);return s==='b'?Math.max.apply(null,k):Math.min.apply(null,k)}
-  function refill(){
-    ['b','a'].forEach(function(s){
-      while(keys(s).length<8){
-        var k=keys(s),dir=s==='b'?-1:1,edge=k.length?(s==='b'?Math.min.apply(null,k):Math.max.apply(null,k)):(s==='b'?1999:2001);
-        book[s][edge+(k.length?dir:0)]=rq();
-      }
-    });
-  }
-  function match(side,p,q){
-    var opp=side==='b'?'a':'b',hit=false;
-    while(q>0&&keys(opp).length){
-      var bp=best(opp);
-      if(side==='b'?p<bp:p>bp)break;
-      var t=Math.min(q,book[opp][bp]);
-      book[opp][bp]-=t;q-=t;lastTrade=bp;hit=bp;
-      if(book[opp][bp]<=0)delete book[opp][bp];
-    }
-    if(q>0)book[side][p]=(book[side][p]||0)+q;
-    return hit;
-  }
-  function fmt(p){return (p*T).toFixed(2)}
-  function render(hit){
-    refill();
-    var bb=best('b'),ba=best('a');
-    var asks=keys('a').sort(function(x,y){return x-y}).slice(0,N).reverse();
-    var bids=keys('b').sort(function(x,y){return y-x}).slice(0,N);
-    var mx=Math.max.apply(null,asks.map(function(p){return book.a[p]}).concat(bids.map(function(p){return book.b[p]})));
-    function rows(list,s){return list.map(function(p){var q=book[s][p];
-      return '<div class="row '+s+(hit===p?' hit':'')+'" style="--w:'+Math.round(q/mx*100)+'%"><span>'+fmt(p)+'</span><span>'+q+'</span></div>'}).join('')}
-    document.getElementById('asks').innerHTML=rows(asks,'a');
-    document.getElementById('bids').innerHTML=rows(bids,'b');
-    document.getElementById('last').textContent='Last '+(lastTrade?fmt(lastTrade):'--');
-    document.getElementById('spread').textContent='Spread '+((ba-bb)*T).toFixed(2);
-  }
-  function step(){
-    var side=Math.random()<.5?'b':'a',bb=best('b'),ba=best('a'),k=Math.floor(Math.random()*5);
-    var p=side==='b'?ba-k:bb+k,hit=match(side,p,rq());
-    if(Math.random()<.35){var s=Math.random()<.5?'b':'a',ks=keys(s);if(ks.length>8)delete book[s][ks[Math.floor(Math.random()*ks.length)]];}
-    render(hit);
-  }
-  for(var i=0;i<8;i++){book.b[1999-i]=rq();book.a[2001+i]=rq()}
-  render();
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(function(){if(!document.hidden)step()},1100);
-  }
+document.documentElement.classList.add('js');
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var rv=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window&&!rm){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  rv.forEach(function(el){io.observe(el)});
+}else{rv.forEach(function(el){el.classList.add('in')})}
+function loop(el,ms,step){
+  var t=null;
+  function go(){if(!t&&!rm)t=setInterval(function(){if(!document.hidden)step()},ms)}
+  function stop(){clearInterval(t);t=null}
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){e[0].isIntersecting?go():stop()},{threshold:.3}).observe(el);
+}
+function $(id){return document.getElementById(id)}
+
+/* order book */
+var T=0.05,N=5,book={b:{},a:{}},lastTrade=null;
+function rq(){return 5+Math.floor(Math.random()*36)}
+function keys(s){return Object.keys(book[s]).map(Number)}
+function best(s){var k=keys(s);return s==='b'?Math.max.apply(null,k):Math.min.apply(null,k)}
+function refill(){['b','a'].forEach(function(s){while(keys(s).length<8){var k=keys(s),d=s==='b'?-1:1,e=k.length?(s==='b'?Math.min.apply(null,k):Math.max.apply(null,k)):(s==='b'?1999:2001);book[s][e+(k.length?d:0)]=rq()}})}
+function match(side,p,q){var o=side==='b'?'a':'b',hit=false;
+  while(q>0&&keys(o).length){var bp=best(o);if(side==='b'?p<bp:p>bp)break;var t=Math.min(q,book[o][bp]);book[o][bp]-=t;q-=t;lastTrade=bp;hit=bp;if(book[o][bp]<=0)delete book[o][bp]}
+  if(q>0)book[side][p]=(book[side][p]||0)+q;return hit}
+function fmt(p){return (p*T).toFixed(2)}
+function drawBook(hit){refill();var bb=best('b'),ba=best('a');
+  var asks=keys('a').sort(function(x,y){return x-y}).slice(0,N).reverse(),bids=keys('b').sort(function(x,y){return y-x}).slice(0,N);
+  var mx=Math.max.apply(null,asks.map(function(p){return book.a[p]}).concat(bids.map(function(p){return book.b[p]})));
+  function rows(l,s){return l.map(function(p){var q=book[s][p];return '<div class="lv '+s+(hit===p?' hit':'')+'" style="--w:'+Math.round(q/mx*100)+'%"><span>'+fmt(p)+'</span><span>'+q+'</span></div>'}).join('')}
+  $('asks').innerHTML=rows(asks,'a');$('bids').innerHTML=rows(bids,'b');
+  $('last').textContent='Last '+(lastTrade?fmt(lastTrade):'--');$('spread').textContent='Spread '+((ba-bb)*T).toFixed(2)}
+function stepBook(){var side=Math.random()<.5?'b':'a',bb=best('b'),ba=best('a'),k=Math.floor(Math.random()*5);
+  var p=side==='b'?ba-k:bb+k,hit=match(side,p,rq());
+  if(Math.random()<.35){var s=Math.random()<.5?'b':'a',ks=keys(s);if(ks.length>8)delete book[s][ks[Math.floor(Math.random()*ks.length)]]}
+  drawBook(hit)}
+for(var i=0;i<8;i++){book.b[1999-i]=rq();book.a[2001+i]=rq()}
+drawBook();loop($('asks'),1100,stepBook);
+
+/* shell */
+var S=[
+ {l:'$ ls',s:['shell','pid 100','reading input'],c:null},
+ {l:'fork()  -> child pid 101',s:['shell','pid 100','forked a child'],c:['child','pid 101','copy of the shell']},
+ {l:'execvp("ls")  in the child',s:['shell','pid 100','forked a child'],c:['ls','pid 101','replaced by ls']},
+ {l:'waitpid(101)  in the parent',s:['shell','pid 100','waiting for child'],c:['ls','pid 101','running']},
+ {l:'exit(0)  child is done',s:['shell','pid 100','waiting for child'],c:['ls','pid 101','exited, status 0']},
+ {l:'prompt returns',s:['shell','pid 100','reading input'],c:null}];
+var si=0;
+function setProc(el,d){var b=el.getElementsByTagName('b')[0],sp=el.getElementsByTagName('span');b.textContent=d[0];sp[0].textContent=d[1];sp[1].textContent=d[2]}
+function drawShell(i){var st=S[i],c=$('sh-c');setProc($('sh-p'),st.s);
+  if(st.c){setProc(c,st.c);c.classList.add('on')}else c.classList.remove('on');
+  $('sh-log').innerHTML=S.slice(Math.max(0,i-3),i+1).map(function(x,j,a){return j===a.length-1?'<em>'+x.l+'</em>':x.l}).join('\n')}
+drawShell(rm?3:0);loop($('sh-p'),1200,function(){si=(si+1)%S.length;drawShell(si)});
+
+/* lisp */
+var nodes=document.querySelectorAll('.nd,.ed'),li=0,cap=['Parse the expression, then evaluate the tree from the leaves up.','Start with the root: +','Split into its two arguments','Parsing done: this is the abstract syntax tree','Evaluate (* 2 3), which is 6','Evaluate (+ 1 6), which is 7'];
+function drawLisp(i){nodes.forEach(function(n){var s=+n.getAttribute('data-s'),e=n.getAttribute('data-e');n.classList.toggle('on',i>=s);if(e)n.classList.toggle('ev',i>=+e)});
+  $('n1').getElementsByTagName('text')[0].textContent=i>=4?'6':'*';$('n0').getElementsByTagName('text')[0].textContent=i>=5?'7':'+';$('ls-cap').textContent=cap[i]}
+drawLisp(rm?5:0);loop($('n0'),1200,function(){li=(li+1)%7;drawLisp(Math.min(li,5))});
 })();
 </script>
 </body>
