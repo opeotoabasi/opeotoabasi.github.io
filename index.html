@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ope Edet | Software Engineer</title>
 <meta name="description" content="Ope Edet, software engineer building systems software in C and C++: a limit order book matching engine, a Unix shell and a LISP interpreter.">
+<script>try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fff;--soft:#f5f6f8;--ink:#12161c;--mute:#5a6472;--line:rgba(18,22,28,.1);--accent:#1d4ed8;--warm:#c2410c;--ease:cubic-bezier(.23,1,.32,1)}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--soft:#151a21;--ink:#e8ecf1;--mute:#9aa5b4;--line:rgba(255,255,255,.1);--accent:#7ea2ff;--warm:#ff9566}}
+:root[data-theme="dark"]{--bg:#0e1116;--soft:#151a21;--ink:#e8ecf1;--mute:#9aa5b4;--line:rgba(255,255,255,.1);--accent:#7ea2ff;--warm:#ff9566}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 Inter,system-ui,sans-serif}
@@ -86,6 +87,41 @@ footer{padding:40px 0 64px;color:var(--mute);font-size:.875rem;box-shadow:0 -1px
 @media (max-width:52rem){.proj{grid-template-columns:1fr;gap:24px;margin-bottom:64px}.cols{grid-template-columns:1fr;gap:4px}.cols dd{margin-bottom:16px}section{padding:64px 0}.hero{padding:64px 0 56px}}
 @media (max-width:30rem){nav b{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}.lv::before,.nd,.ed,.nd circle,.proc.child,.btn,nav a{transition:none}.lv.hit{animation:none}}
+
+body,nav,footer,.demo .in{transition:background-color 200ms ease,color 200ms ease}
+nav .wrap{gap:12px}
+nav ul{flex:1;justify-content:flex-end}
+nav a[aria-current]{color:var(--ink);background:var(--soft)}
+.bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transform:scaleX(var(--p,0));transform-origin:left}
+.theme{position:relative;flex:none;width:40px;height:40px;border:0;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer;transition:transform 150ms var(--ease),background-color 150ms ease}
+.theme:active{transform:scale(.94)}
+@media (hover:hover){.theme:hover{background:var(--soft)}}
+.theme svg{position:absolute;inset:10px;width:20px;height:20px;transition:opacity 200ms var(--ease),transform 200ms var(--ease)}
+:root[data-theme="light"] .theme .moon,:root[data-theme="dark"] .theme .sun{opacity:0;transform:scale(.6) rotate(-40deg)}
+.js #hero-title .w{display:inline-block;opacity:0;transform:translateY(14px);transition:opacity 500ms var(--ease) calc(var(--i)*45ms),transform 500ms var(--ease) calc(var(--i)*45ms)}
+.js #hero-title.go .w{opacity:1;transform:none}
+.lead{font-size:1.125rem;max-width:44rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:40px 0}
+.stats b{display:block;font-size:2rem;line-height:1.1;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{display:block;margin-top:4px;font-size:.875rem;color:var(--mute);max-width:16ch}
+.facets{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facet{background:var(--soft);border-radius:12px;padding:24px;box-shadow:0 0 0 1px var(--line);transition:transform 250ms var(--ease),box-shadow 250ms var(--ease)}
+.facet h3{font-size:1rem}
+.facet p{margin:0;color:var(--mute);font-size:.9375rem}
+@media (hover:hover){.facet:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 8px 24px rgba(18,22,28,.07)}.demo{transition:transform 250ms var(--ease),box-shadow 250ms var(--ease)}.demo:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(18,22,28,.08)}}
+.story{margin-top:32px}
+.story-btn{display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 20px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:500 1rem Inter,system-ui,sans-serif;cursor:pointer;transition:transform 150ms var(--ease),filter 150ms ease}
+.story-btn:active{transform:scale(.97)}
+@media (hover:hover){.story-btn:hover{filter:brightness(1.08)}}
+.story-btn svg{width:18px;height:18px;transition:transform 350ms var(--ease)}
+.story-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.story-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows 450ms var(--ease)}
+.story-body>div{overflow:hidden;min-height:0}
+.story-body.open{grid-template-rows:1fr}
+.story-in{padding-top:24px;opacity:0;transform:translateY(8px);transition:opacity 300ms var(--ease),transform 300ms var(--ease)}
+.story-body.open .story-in{opacity:1;transform:none;transition-delay:120ms}
+@media (max-width:52rem){.stats{grid-template-columns:1fr 1fr}.facets{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.js #hero-title .w{opacity:1;transform:none;transition:none}.facet,.demo,.story-btn,.story-btn svg,.story-body,.story-in,.theme,.theme svg,body,nav,footer,.demo .in{transition:none}.bar{display:none}}
 </style>
 </head>
 <body>
@@ -100,12 +136,13 @@ footer{padding:40px 0 64px;color:var(--mute);font-size:.875rem;box-shadow:0 -1px
     <li><a href="#cv">CV</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-</div></nav>
+  <button class="theme" id="theme" type="button" aria-label="Switch to dark mode"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</div><div class="bar" aria-hidden="true"></div></nav>
 
 <main class="wrap">
 <header class="hero">
   <p class="status rv"><i></i>Looking for systems and infrastructure internships</p>
-  <h1 class="rv" style="--d:60ms">Software engineer building systems software in C and C++.</h1>
+  <h1 id="hero-title">Software engineer building systems software in C and C++.</h1>
   <p class="lede rv" style="--d:120ms">I'm an Electrical and Electronics Engineering student at Obafemi Awolowo University. I learn by building from first principles: a limit order book matching engine, a Unix shell and a LISP interpreter.</p>
   <div class="row rv" style="--d:180ms">
     <a class="btn pri" href="#projects">See my projects</a>
@@ -116,9 +153,27 @@ footer{padding:40px 0 64px;color:var(--mute);font-size:.875rem;box-shadow:0 -1px
 </header>
 
 <section id="about" aria-labelledby="h-about">
-  <h2 id="h-about" class="rv">My story</h2>
-  <p class="rv">Before I was 10, I was building small hardware and electrical projects. At about 11 I met BASIC, the first language I used in class, and wrote my first program, a Monopoly game. Moving from hardware to software has shaped how I approach everything since: I want to know how the machine really works.</p>
-  <p class="rv">I also used to be a trader. What kept me interested was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong. Trading showed me an order book from the user's side, so I decided to build one from the other side. That is the matching engine below, and it is why I want to work on trading and infrastructure software.</p>
+  <h2 id="h-about" class="rv">About me</h2>
+  <p class="lead rv">I'm Ope, a second-year Electrical and Electronics Engineering student at Obafemi Awolowo University and a software engineer in the making. I build systems software in C and C++ because I want to understand what happens underneath the tools I use, and I'm aiming to work on the infrastructure behind financial markets.</p>
+  <div class="stats rv">
+    <div><b data-count="200" data-suffix="+">200+</b><span>problems solved on Codeforces and LeetCode</span></div>
+    <div><b data-count="3">3</b><span>systems projects built from scratch</span></div>
+    <div><b>1st</b><span>place at Circom, a solo circuit assembly competition</span></div>
+    <div><b data-count="200" data-suffix="%+">200%+</b><span>club membership growth as JETS president</span></div>
+  </div>
+  <div class="facets">
+    <div class="facet rv"><h3>Who I am</h3><p>A former trader turned engineer. Before programming I built hardware and electrical projects, which is why I like systems that sit close to the machine.</p></div>
+    <div class="facet rv" style="--d:60ms"><h3>What I do</h3><p>I write systems software in C and C++: an order book matching engine with a concurrent queue, TCP layer and SQLite persistence, a Unix shell and a LISP interpreter.</p></div>
+    <div class="facet rv"><h3>Strengths</h3><p>Learning from first principles, seeing a project through every planned stage, and leading and communicating with a team, which I practised as president of my school's JETS Club.</p></div>
+    <div class="facet rv" style="--d:60ms"><h3>Ambition</h3><p>To work on trading and infrastructure software, the systems that accept, match and settle orders quickly and correctly, and to grow into an engineer who can design them end to end.</p></div>
+  </div>
+  <div class="story rv">
+    <button class="story-btn" id="story-btn" type="button" aria-expanded="false" aria-controls="story-body"><span>My story</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="story-body" id="story-body" role="region" aria-label="My story" inert><div><div class="story-in">
+      <p>Before I was 10, I was building small hardware and electrical projects. At about 11 I met BASIC, the first language I used in class, and wrote my first program, a Monopoly game. Moving from hardware to software has shaped how I approach everything since: I want to know how the machine really works.</p>
+      <p>I also used to be a trader. What kept me interested was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong. Trading showed me an order book from the user's side, so I decided to build one from the other side. That is the matching engine below, and it is why I want to work on trading and infrastructure software.</p>
+    </div></div></div>
+  </div>
 </section>
 
 <section id="projects" aria-labelledby="h-projects">
@@ -301,6 +356,43 @@ var nodes=document.querySelectorAll('.nd,.ed'),li=0,cap=['Parse the expression, 
 function drawLisp(i){nodes.forEach(function(n){var s=+n.getAttribute('data-s'),e=n.getAttribute('data-e');n.classList.toggle('on',i>=s);if(e)n.classList.toggle('ev',i>=+e)});
   $('n1').getElementsByTagName('text')[0].textContent=i>=4?'6':'*';$('n0').getElementsByTagName('text')[0].textContent=i>=5?'7':'+';$('ls-cap').textContent=cap[i]}
 drawLisp(rm?5:0);loop($('n0'),1200,function(){li=(li+1)%7;drawLisp(Math.min(li,5))});
+/* hero words */
+var ht=$('hero-title');
+if(ht){var ws=ht.textContent.trim().split(' ');ht.innerHTML=ws.map(function(w,i){return '<span class="w" style="--i:'+i+'">'+w+'</span>'}).join(' ');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){ht.classList.add('go')})})}
+
+/* story */
+var sb=$('story-btn'),sbody=$('story-body');
+sbody.inert=true;
+sb.addEventListener('click',function(){var o=sb.getAttribute('aria-expanded')!=='true';sb.setAttribute('aria-expanded',String(o));sbody.classList.toggle('open',o);sbody.inert=!o});
+
+/* counters */
+function suf(c){return c.getAttribute('data-suffix')||''}
+function countUp(el){var to=+el.getAttribute('data-count'),t0=null;
+  function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/900,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e)+suf(el);if(p<1)requestAnimationFrame(f)}
+  requestAnimationFrame(f)}
+var cs=document.querySelectorAll('[data-count]');
+if('IntersectionObserver' in window&&!rm){
+  cs.forEach(function(c){c.textContent='0'+suf(c)});
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:.6});
+  cs.forEach(function(c){cio.observe(c)});
+}
+
+/* theme */
+var root=document.documentElement,tb=$('theme');
+function setTheme(t,save){root.setAttribute('data-theme',t);tb.setAttribute('aria-label',t==='dark'?'Switch to light mode':'Switch to dark mode');if(save){try{localStorage.setItem('theme',t)}catch(e){}}}
+setTheme(root.getAttribute('data-theme')||'light',false);
+tb.addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark',true)});
+
+/* nav highlight and scroll progress */
+var links=document.querySelectorAll('nav a[href^="#"]');
+if('IntersectionObserver' in window){
+  var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});var a=document.querySelector('nav a[href="#'+e.target.id+'"]');if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-40% 0px -55% 0px'});
+  links.forEach(function(a){var sec=document.querySelector(a.getAttribute('href'));if(sec)nio.observe(sec)});
+}
+var bar=document.querySelector('.bar'),tick=false;
+function prog(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',h>0?Math.min(scrollY/h,1):0);tick=false}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(prog)}},{passive:true});prog();
 })();
 </script>
 </body>
