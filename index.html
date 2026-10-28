@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ope Edet | Software Engineer</title>
-<meta name="description" content="Ope Edet, software engineer building systems software in C and C++: a limit order book matching engine, a Unix shell and a LISP interpreter.">
+<meta name="description" content="Ope Edet, software engineer building backend services in Python and systems software in C and C++: the Netrakr backend, a limit order book matching engine, a Unix shell and a LISP interpreter.">
 <script>try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,6 +128,67 @@ body{overflow-x:clip}
 .js .rr.in{opacity:1;transform:none}
 @media (max-width:52rem){.js .rr{transform:translateX(24px)}}
 @media (prefers-reduced-motion:reduce){.js .rr{opacity:1;transform:none;transition:none}}
+
+/* Netrakr zone map, ported from the Net Scout sign-up page */
+.nzm{--q-excellent:#19b97a;--q-good:#e2b800;--q-fair:#ee8a2b;--q-poor:#dc414a;--q-nodata:#8797a8;--map-bg:#eef6fd;--map-park:#dcf1de;--map-block:#dde7f1;--map-road:#fff;--map-label:#1b3550;--map-halo:#fff;--map-fill:.6;padding:0;overflow:hidden}
+:root[data-theme="dark"] .nzm{--q-excellent:#34d399;--q-good:#facc15;--q-fair:#fb923c;--q-poor:#f87171;--q-nodata:#7b8794;--map-bg:#141b24;--map-park:#17291f;--map-block:#222c38;--map-road:#1f2a36;--map-label:#e8ecf1;--map-halo:#0e1116;--map-fill:.5}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.nz-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:12px 12px 10px}
+.nz-title{display:flex;align-items:center;gap:8px;margin:0;font-size:.8125rem;font-weight:600;color:var(--mute)}
+.nz-title i{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 4px rgba(22,163,74,.15)}
+.nz-chips{display:flex;flex-wrap:wrap;gap:6px}
+.nz-chip{min-height:40px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:500 .8125rem Inter,system-ui,sans-serif;cursor:pointer;box-shadow:0 0 0 1px var(--line);transition:background-color 150ms ease,color 150ms ease,transform 150ms var(--ease)}
+.nz-chip:active{transform:scale(.96)}
+.nz-chip[aria-pressed="true"]{background:var(--accent);color:#fff;box-shadow:none}
+:root[data-theme="dark"] .nz-chip[aria-pressed="true"]{color:#0e1116}
+.nz-canvas svg{background:var(--map-bg)}
+.nz-park{fill:var(--map-park)}
+.nz-block{fill:var(--map-block)}
+.nz-road{fill:none;stroke:var(--map-road);stroke-linecap:round;stroke-width:12}
+.nz-zone{--zc:var(--q-nodata);cursor:pointer;outline:none}
+.nz-zone[data-q="excellent"]{--zc:var(--q-excellent)}
+.nz-zone[data-q="good"]{--zc:var(--q-good)}
+.nz-zone[data-q="fair"]{--zc:var(--q-fair)}
+.nz-zone[data-q="poor"]{--zc:var(--q-poor)}
+.nz-shape{fill:var(--zc);fill-opacity:var(--map-fill);stroke:var(--zc);stroke-width:2.5;stroke-linejoin:round;transition:fill 600ms,stroke 600ms,stroke-width 250ms}
+.nz-zone:hover .nz-shape,.nz-zone.is-selected .nz-shape,.nz-zone:focus-visible .nz-shape{stroke-width:5}
+.nz-dot{fill:var(--map-halo);stroke:var(--zc);stroke-width:3;transition:stroke 600ms;transform-box:fill-box;transform-origin:center}
+.nz-ring{fill:none;stroke:var(--zc);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.nz-zone.is-selected .nz-ring{opacity:1}
+svg text.nz-label{font:600 14px Inter,system-ui,sans-serif;fill:var(--map-label);text-anchor:middle;dominant-baseline:auto;pointer-events:none;paint-order:stroke;stroke:var(--map-halo);stroke-width:3px;stroke-linejoin:round}
+.nz-ping{fill:none;stroke:var(--accent);stroke-width:2;transform-box:fill-box;transform-origin:center;pointer-events:none}
+.nz-info{margin:10px 12px 0;padding:12px 14px;border-radius:8px;background:var(--bg);box-shadow:0 0 0 1px var(--line)}
+.nz-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.nz-name{margin:0;font-size:1rem;font-weight:600;line-height:1.3}
+.nz-cat{margin:0;color:var(--mute);font-size:.8125rem}
+.nz-q{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--soft);font-size:.8125rem;font-weight:500;white-space:nowrap}
+.nz-q::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--q-nodata))}
+.nz-q[data-q="excellent"]{--c:var(--q-excellent)}
+.nz-q[data-q="good"]{--c:var(--q-good)}
+.nz-q[data-q="fair"]{--c:var(--q-fair)}
+.nz-q[data-q="poor"]{--c:var(--q-poor)}
+.nz-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 0}
+.nz-stats dt{color:var(--mute);font-size:.75rem}
+.nz-stats dd{margin:0;font-size:1.375rem;font-weight:600;line-height:1.2;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.nz-stats small{color:var(--mute);font-size:.75rem;font-weight:500;letter-spacing:0}
+.nz-foot{margin:8px 0 0;color:var(--mute);font-size:.75rem}
+.nz-legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:10px 0 0;padding:0 12px;list-style:none;color:var(--mute);font-size:.75rem}
+.nz-legend li{display:flex;align-items:center;gap:6px}
+.nz-legend i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.nzm .cap{margin:8px 12px 12px}
+@media (max-width:36rem){svg text.nz-label{display:none}.nz-stats dd{font-size:1.125rem}}
+@media (prefers-reduced-motion:no-preference){
+  .js .nz-shape{stroke-dasharray:1;stroke-dashoffset:1;fill-opacity:0}
+  .nzm.is-visible .nz-shape{animation:nz-draw 1.2s var(--ease) forwards;animation-delay:calc(var(--i)*150ms + 300ms)}
+  .nzm.is-visible .nz-dot{animation:nz-pop .5s var(--ease) backwards;animation-delay:calc(var(--i)*150ms + 1000ms)}
+  .nz-zone.is-selected .nz-ring{animation:nz-ring 1.8s ease-out infinite}
+  .nz-ping{animation:nz-ping 1.6s ease-out forwards}
+}
+@keyframes nz-draw{0%{stroke-dashoffset:1;fill-opacity:0}60%{stroke-dashoffset:0;fill-opacity:0}100%{stroke-dashoffset:0;fill-opacity:var(--map-fill)}}
+@keyframes nz-pop{from{transform:scale(0);opacity:0}to{transform:none;opacity:1}}
+@keyframes nz-ring{from{transform:scale(.7);opacity:.8}to{transform:scale(2.1);opacity:0}}
+@keyframes nz-ping{from{transform:scale(.4);opacity:.8}to{transform:scale(5);opacity:0}}
+@media (prefers-reduced-motion:reduce){.nz-shape,.nz-dot,.nz-chip{transition:none}}
 </style>
 </head>
 <body>
@@ -147,36 +208,36 @@ body{overflow-x:clip}
 
 <main class="wrap">
 <header class="hero">
-  <p class="status rv"><i></i>Looking for systems and infrastructure internships</p>
-  <h1 id="hero-title">Software engineer building systems software in C and C++.</h1>
-  <p class="lede rv" style="--d:120ms">I'm an Electrical and Electronics Engineering student at Obafemi Awolowo University. I learn by building from first principles: a limit order book matching engine, a Unix shell and a LISP interpreter.</p>
+  <p class="status rv"><i></i>Looking for backend and systems internships</p>
+  <h1 id="hero-title">Software engineer building backend and systems software.</h1>
+  <p class="lede rv" style="--d:120ms">I'm an Electrical and Electronics Engineering student at Obafemi Awolowo University and the founder of Netrakr. I build backend services in Python and systems software in C and C++, from first principles.</p>
   <div class="row rv" style="--d:180ms">
     <a class="btn pri" href="#projects">See my projects</a>
     <a class="btn" href="Ope_Edet_Resume.pdf">Download CV</a>
     <a class="btn" href="mailto:opeotoabasi@gmail.com">Email</a>
     <a class="btn" href="https://github.com/opeotoabasi">GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/edetope">LinkedIn</a>
   </div>
 </header>
 
 <section id="about" aria-labelledby="h-about">
   <h2 id="h-about" class="rv">About me</h2>
-  <p class="lead rv">I'm Ope, a second-year Electrical and Electronics Engineering student at Obafemi Awolowo University and a software engineer in the making. I build systems software in C and C++ because I want to understand what happens underneath the tools I use, and I'm aiming to work on the infrastructure behind financial markets.</p>
+  <p class="lead rv">I'm Ope, a second-year Electrical and Electronics Engineering student at Obafemi Awolowo University and a software engineer in the making. I build backend services and systems software because I want to understand what happens underneath the tools I use, and I'm aiming to work on infrastructure and financial technology.</p>
   <div class="stats rv">
     <div><b data-count="200" data-suffix="+">200+</b><span>problems solved on Codeforces and LeetCode</span></div>
-    <div><b data-count="3">3</b><span>systems projects built from scratch</span></div>
+    <div><b data-count="4">4</b><span>projects built from scratch</span></div>
     <div><b>1st</b><span>place at Circom, a solo circuit assembly competition</span></div>
     <div><b data-count="200" data-suffix="%+">200%+</b><span>club membership growth as JETS president</span></div>
   </div>
   <div class="facets">
-    <div class="facet rv"><h3>Who I am</h3><p>A former trader turned engineer. Before programming I built hardware and electrical projects, which is why I like systems that sit close to the machine.</p></div>
-    <div class="facet rv" style="--d:60ms"><h3>What I do</h3><p>I write systems software in C and C++: an order book matching engine with a concurrent queue, TCP layer and SQLite persistence, a Unix shell and a LISP interpreter.</p></div>
+    <div class="facet rv"><h3>Who I am</h3><p>An engineering student who started with hardware and electrical projects, which is why I like systems that sit close to the machine.</p></div>
+    <div class="facet rv" style="--d:60ms"><h3>What I do</h3><p>I build the Netrakr backend with FastAPI and PostgreSQL, and write systems software in C and C++: an order book matching engine, a Unix shell and a LISP interpreter.</p></div>
     <div class="facet rv" style="--d:120ms"><h3>Strengths</h3><p>Learning from first principles, seeing a project through every planned stage, and leading and communicating with a team, which I practised as president of my school's JETS Club.</p></div>
   </div>
   <div class="story rv">
     <button class="story-btn" id="story-btn" type="button" aria-expanded="false" aria-controls="story-body"><span>My story</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
     <div class="story-body" id="story-body" role="region" aria-label="My story" inert><div><div class="story-in">
       <p>Before I was 10, I was building small hardware and electrical projects. At about 11 I met BASIC, the first language I used in class, and wrote my first program, a Monopoly game. Moving from hardware to software has shaped how I approach everything since: I want to know how the machine really works.</p>
-      <p>I also used to be a trader. What kept me interested was the machinery under the screen: how an order is accepted, queued by price and time, matched and reported back, and how fast a system can do that without getting it wrong. Trading showed me an order book from the user's side, so I decided to build one from the other side. That is the matching engine below, and it is why I want to work on trading and infrastructure software.</p>
     </div></div></div>
   </div>
 </section>
@@ -186,14 +247,90 @@ body{overflow-x:clip}
 
   <article class="proj">
     <div class="rv">
+      <h3>Netrakr (Net Scout)</h3>
+      <p class="stack mono">Python, FastAPI, PostgreSQL, SQLModel</p>
+      <p>The backend for a crowdsourced app that maps mobile-network quality across Nigerian campuses. I founded the project and lead the backend.</p>
+      <ul>
+        <li>REST API and relational schema with FastAPI and SQLModel</li>
+        <li>Zone assignment that takes several GPS fixes and assigns a campus zone only when they agree</li>
+        <li>Campus zones stored as polygons (GeoJSON), with schema changes through Alembic migrations</li>
+        <li>Built in a team of three with Git pull requests; waitlist of 100+ students</li>
+      </ul>
+    </div>
+    <div class="rr" style="--d:120ms"><div class="demo nzm" id="nzm">
+      <div class="nz-top">
+        <p class="nz-title"><i></i>Example campus</p>
+        <div class="nz-chips" role="group" aria-label="Choose a network">
+          <button class="nz-chip" type="button" aria-pressed="true">MTN</button>
+          <button class="nz-chip" type="button" aria-pressed="false">Airtel</button>
+          <button class="nz-chip" type="button" aria-pressed="false">Glo</button>
+          <button class="nz-chip" type="button" aria-pressed="false">9mobile</button>
+        </div>
+      </div>
+      <div class="nz-canvas">
+        <svg viewBox="0 0 600 270" role="group" aria-label="Illustrative campus map with five zones. Select a zone to see its example results.">
+          <path class="nz-park" d="M-10 -10H200V118C140 134 60 128 -10 112Z"/>
+          <g class="nz-block"><rect x="236" y="150" width="40" height="12" rx="4"/><rect x="420" y="160" width="90" height="14" rx="4"/><rect x="60" y="30" width="100" height="40" rx="8"/></g>
+          <g class="nz-road"><path d="M-10 160C140 148 300 170 610 154"/><path d="M206 -10C196 100 216 190 208 280"/><path d="M388 -10C384 100 392 190 386 280"/></g>
+          <g>
+        <g class="nz-zone" tabindex="0" role="button" aria-label="Hostel block" style="--i:0">
+          <path class="nz-shape" pathLength="1" d="M52 150H190V232H52Z"/>
+          <circle class="nz-ring" cx="121" cy="184" r="15"/><circle class="nz-dot" cx="121" cy="184" r="7"/>
+          <text class="nz-label" x="121" y="216">Hostel block</text>
+        </g>
+        <g class="nz-zone" tabindex="0" role="button" aria-label="Lecture theatre" style="--i:1">
+          <path class="nz-shape" pathLength="1" d="M232 62L360 40L376 112L248 134Z"/>
+          <circle class="nz-ring" cx="304" cy="80" r="15"/><circle class="nz-dot" cx="304" cy="80" r="7"/>
+          <text class="nz-label" x="304" y="106">Lecture theatre</text>
+        </g>
+        <g class="nz-zone" tabindex="0" role="button" aria-label="Library" style="--i:2">
+          <path class="nz-shape" pathLength="1" d="M400 40H548V112H478V150H400Z"/>
+          <circle class="nz-ring" cx="474" cy="70" r="15"/><circle class="nz-dot" cx="474" cy="70" r="7"/>
+          <text class="nz-label" x="474" y="98">Library</text>
+        </g>
+        <g class="nz-zone" tabindex="0" role="button" aria-label="Cafeteria" style="--i:3">
+          <path class="nz-shape" pathLength="1" d="M226 168H318V232H226Z"/>
+          <circle class="nz-ring" cx="272" cy="194" r="15"/><circle class="nz-dot" cx="272" cy="194" r="7"/>
+          <text class="nz-label" x="272" y="222">Cafeteria</text>
+        </g>
+        <g class="nz-zone" tabindex="0" role="button" aria-label="Main gate" style="--i:4">
+          <path class="nz-shape" pathLength="1" d="M400 186H548V232H400Z"/>
+          <circle class="nz-ring" cx="474" cy="200" r="15"/><circle class="nz-dot" cx="474" cy="200" r="7"/>
+          <text class="nz-label" x="474" y="223">Main gate</text>
+        </g>
+          </g>
+          <g class="nz-pings"></g>
+        </svg>
+      </div>
+      <div class="nz-info">
+        <div class="nz-head">
+          <div><p class="nz-name" id="nz-name">Hostel block</p><p class="nz-cat" id="nz-cat">Hostel</p></div>
+          <span class="nz-q" id="nz-q" data-q="good">Good</span>
+        </div>
+        <dl class="nz-stats">
+          <div><dt>Download</dt><dd><span id="nz-down">35</span> <small>Mbps</small></dd></div>
+          <div><dt>Upload</dt><dd><span id="nz-up">11</span> <small>Mbps</small></dd></div>
+          <div><dt>Ping</dt><dd><span id="nz-ms">32</span> <small>ms</small></dd></div>
+        </dl>
+        <p class="nz-foot" id="nz-foot">1,842 tests · High confidence</p>
+      </div>
+      <p class="sr-only" id="nz-sr" aria-live="polite"></p>
+      <ul class="nz-legend">
+        <li><i style="--c:var(--q-excellent)"></i>Excellent</li><li><i style="--c:var(--q-good)"></i>Good</li><li><i style="--c:var(--q-fair)"></i>Fair</li><li><i style="--c:var(--q-poor)"></i>Poor</li><li><i style="--c:var(--q-nodata)"></i>Not enough data</li>
+      </ul>
+      <p class="cap">Illustration with example numbers, not real measurements. Tap a zone or switch network.</p>
+    </div></div>
+  </article>
+
+  <article class="proj">
+    <div class="rv">
       <h3>Limit order book and matching engine</h3>
-      <p class="stack mono">C++, CMake, SQLite</p>
+      <p class="stack mono">C++, CMake</p>
       <p>A price-time priority order book that matches limit and market orders, built out along the path an order takes in a real venue.</p>
       <ul>
         <li>Matching core with limit orders, market orders and cancellation</li>
-        <li>Concurrent producer-consumer order queue</li>
-        <li>TCP networking layer and SQLite persistence</li>
         <li>Interface, implementation and tests in separate files</li>
+        <li>In progress: concurrent producer-consumer order queue, then a TCP networking layer and persistence</li>
       </ul>
     </div>
     <div class="rr" style="--d:120ms"><div class="demo" aria-hidden="true"><div class="in">
@@ -280,26 +417,27 @@ body{overflow-x:clip}
 <section id="skills" aria-labelledby="h-skills">
   <h2 id="h-skills" class="rv">Skills</h2>
   <dl class="cols rv">
-    <dt>Languages</dt><dd>C and C++ (primary), Python</dd>
-    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, TCP networking, parsing</dd>
-    <dt>Tools</dt><dd>Linux command line, Git, GDB, CMake, SQLite</dd>
+    <dt>Languages</dt><dd>C and C++ (primary), Python, SQL</dd>
+    <dt>Backend</dt><dd>FastAPI, PostgreSQL, SQLModel, REST APIs, Alembic</dd>
+    <dt>Systems and Linux</dt><dd>Process control, signals, file descriptors, memory management, concurrency, parsing</dd>
+    <dt>Tools</dt><dd>Linux command line, Git, GDB, CMake</dd>
     <dt>Algorithms</dt><dd>Hash maps, trees, priority queues, graphs</dd>
   </dl>
 </section>
 
 <section id="cv" aria-labelledby="h-cv">
   <h2 id="h-cv" class="rv">CV</h2>
-  <p class="rv">My full CV covers my education, projects, competitions and skills on a single page.</p>
+  <p class="rv">My full CV covers my education, experience, projects, competitions and skills on a single page.</p>
   <div class="row rv"><a class="btn pri" href="Ope_Edet_Resume.pdf">Download CV (PDF)</a></div>
 </section>
 
 <section id="contact" aria-labelledby="h-contact">
   <h2 id="h-contact" class="rv">Contact</h2>
-  <p class="rv">I'm looking for a systems or infrastructure software engineering internship. The best way to reach me is by email.</p>
-  <div class="row rv"><a class="btn pri" href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a><a class="btn" href="https://github.com/opeotoabasi">GitHub</a></div>
+  <p class="rv">I'm looking for a backend or systems software engineering internship. The best way to reach me is by email or LinkedIn.</p>
+  <div class="row rv"><a class="btn pri" href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a><a class="btn" href="https://www.linkedin.com/in/edetope">LinkedIn</a><a class="btn" href="https://github.com/opeotoabasi">GitHub</a></div>
 </section>
 </main>
-<footer><div class="wrap">Ope Edet &middot; <a href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a> &middot; <a href="https://github.com/opeotoabasi">GitHub</a></div></footer>
+<footer><div class="wrap">Ope Edet &middot; <a href="mailto:opeotoabasi@gmail.com">opeotoabasi@gmail.com</a> &middot; <a href="https://github.com/opeotoabasi">GitHub</a> &middot; <a href="https://www.linkedin.com/in/edetope">LinkedIn</a></div></footer>
 
 <script>
 (function(){
@@ -317,6 +455,53 @@ function loop(el,ms,step){
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){e[0].isIntersecting?go():stop()},{threshold:.3}).observe(el);
 }
 function $(id){return document.getElementById(id)}
+
+/* netrakr zone map, ported from the Net Scout sign-up page */
+(function(){
+var root=$('nzm');if(!root)return;
+var NET=['MTN','Airtel','Glo','9mobile'],QL=['Excellent','Good','Fair','Poor','No data'],QK=['excellent','good','fair','poor','nodata'];
+/* Example numbers only. Per network: [quality, download Mbps, upload Mbps, ping ms, tests] */
+var Z=[
+ {name:'Hostel block',cat:'Hostel',d:[[1,35,11,32,1842],[0,42,18,28,83],[2,6,2,95,31],[4,0,0,0,4]]},
+ {name:'Lecture theatre',cat:'Lecture theatre',d:[[0,48,16,24,640],[1,31,9,41,212],[2,12,4,70,57],[3,5,1,110,22]]},
+ {name:'Library',cat:'Library',d:[[1,29,10,38,311],[1,27,8,44,95],[2,14,5,66,40],[4,0,0,0,7]]},
+ {name:'Cafeteria',cat:'Cafeteria',d:[[2,15,5,64,148],[3,6,2,102,36],[4,0,0,0,9],[2,11,3,72,15]]},
+ {name:'Main gate',cat:'Gate',d:[[2,13,4,67,318],[1,26,8,46,201],[3,4,1,120,18],[4,0,0,0,3]]}];
+function conf(n){return n<10?'Not enough data':n<50?'Low confidence':n<300?'Moderate confidence':'High confidence'}
+function countTo(el,to){
+  cancelAnimationFrame(el._raf);
+  var from=Number(el.dataset.value)||0;el.dataset.value=to==null?0:to;
+  if(rm||to===null){el.textContent=to===null?'\u2013':to;return}
+  var t0=performance.now();
+  function f(now){var t=Math.min(1,(now-t0)/450);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-t,3)));if(t<1)el._raf=requestAnimationFrame(f)}
+  el._raf=requestAnimationFrame(f)}
+var zs=[].slice.call(root.querySelectorAll('.nz-zone')),chips=[].slice.call(root.querySelectorAll('.nz-chip')),net=0,sel=0;
+function render(){
+  var z=Z[sel],d=z.d[net],q=d[0],empty=q===4;
+  zs.forEach(function(el,i){el.dataset.q=QK[Z[i].d[net][0]];el.classList.toggle('is-selected',i===sel);el.setAttribute('aria-pressed',String(i===sel))});
+  $('nz-name').textContent=z.name;$('nz-cat').textContent=z.cat;
+  $('nz-q').textContent=QL[q];$('nz-q').dataset.q=QK[q];
+  countTo($('nz-down'),empty?null:d[1]);countTo($('nz-up'),empty?null:d[2]);countTo($('nz-ms'),empty?null:d[3]);
+  $('nz-foot').textContent=d[4].toLocaleString('en')+' tests \u00b7 '+conf(d[4]);
+  $('nz-sr').textContent=z.name+' on '+NET[net]+': '+QL[q]+'. '+(empty?'Not enough data. ':d[1]+' Mbps download, '+d[2]+' Mbps upload, '+d[3]+' ms ping. ')+'Based on '+d[4]+' example tests.'}
+zs.forEach(function(el,i){
+  function pick(){if(sel!==i){sel=i;render()}}
+  el.addEventListener('click',pick);el.addEventListener('focus',pick);
+  el.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')pick()})});
+chips.forEach(function(c,i){c.addEventListener('click',function(){net=i;chips.forEach(function(x,j){x.setAttribute('aria-pressed',String(j===i))});render()})});
+render();
+/* "a test just arrived" ripples */
+if(!rm){
+  var layer=root.querySelector('.nz-pings'),spots=[].slice.call(root.querySelectorAll('.nz-dot')).map(function(d){return[+d.getAttribute('cx'),+d.getAttribute('cy')]});
+  setInterval(function(){
+    if(document.hidden||!root.classList.contains('is-visible'))return;
+    var s=spots[Math.floor(Math.random()*spots.length)],r=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    r.setAttribute('class','nz-ping');r.setAttribute('cx',s[0]+(Math.random()-.5)*50);r.setAttribute('cy',s[1]+(Math.random()-.5)*24);r.setAttribute('r',5);
+    r.addEventListener('animationend',function(){r.remove()});layer.appendChild(r)},1800)}
+/* draw in when scrolled into view */
+if('IntersectionObserver' in window){new IntersectionObserver(function(es,o){if(es[0].isIntersecting){root.classList.add('is-visible');o.disconnect()}},{threshold:.25}).observe(root)}
+else root.classList.add('is-visible');
+})();
 
 /* order book */
 var T=0.05,N=5,book={b:{},a:{}},lastTrade=null;
